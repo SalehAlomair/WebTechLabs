@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 24px;
+    background-color: #f6f8fb;
+    color: #1f2937;
+}
+
+#page-title {
+    text-align: center;
+    color: #0f172a;
+    background-color: #dbeafe;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.links-wrapper {
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.lab-link {
+    display: block;
+    padding: 10px 12px;
+    margin: 8px 0;
+    text-align: center;
+    background-color: #e2e8f0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #0f172a;
+}
+
+.lab-link:visited {
+    color: #6b21a8;
+}
+
+.lab-link:hover {
+    background-color: #c7d2fe;
+}
+
+.lab-link:active {
+    background-color: #93c5fd;
+}
+
+ul, ol {
+    line-height: 1.7;
+}
+
+.lab-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+
+.lab-table th,
+.lab-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    text-align: left;
+}
+
+.lab-table th {
+    background-color: #e2e8f0;
+}

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Listing</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <h1 id="page-title">Listing (Nested)</h1>
+
+    <h3>Web Technologies Topics</h3>
+    <ul>
+        <li>HTML
+            <ul>
+                <li>Elements</li>
+                <li>Attributes</li>
+                <li>Forms</li>
+            </ul>
+        </li>
+        <li>CSS
+            <ul>
+                <li>Selectors</li>
+                <li>Box Model</li>
+                <li>Layouts</li>
+            </ul>
+        </li>
+        <li>Django
+            <ul>
+                <li>URLs</li>
+                <li>Views</li>
+                <li>Templates</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Lab Priorities</h3>
+    <ol>
+        <li>Build URL mappings</li>
+        <li>Create view functions</li>
+        <li>Connect templates</li>
+    </ol>
+</body>
+</html>

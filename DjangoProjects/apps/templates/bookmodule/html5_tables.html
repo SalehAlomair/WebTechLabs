@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tables</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <h1 id="page-title">Tables and Layout Customization</h1>
+
+    <table class="lab-table">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>123</td>
+                <td>Continuous Delivery</td>
+                <td>J. Humble and D. Farley</td>
+                <td>Software Engineering</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>Secrets of Reverse Engineering</td>
+                <td>E. Eilam</td>
+                <td>Security</td>
+            </tr>
+            <tr>
+                <td>789</td>
+                <td>Designing Data-Intensive Applications</td>
+                <td>M. Kleppmann</td>
+                <td>Data Systems</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
