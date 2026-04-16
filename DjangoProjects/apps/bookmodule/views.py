@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import Book
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -57,3 +58,24 @@ def search(request):
         return render(request, 'bookmodule/bookList.html', {'books': newBooks})
 
     return render(request, 'bookmodule/search.html')
+
+
+def simple_query(request):
+    mybooks = Book.objects.filter(title__icontains='and')
+    return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+
+
+def complex_query(request):
+    mybooks = Book.objects.filter(
+        author__isnull=False
+    ).filter(
+        title__icontains='and'
+    ).filter(
+        edition__gte=2
+    ).exclude(
+        price__lte=100
+    )[:10]
+
+    if len(mybooks) >= 1:
+        return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+    return render(request, 'bookmodule/index.html')

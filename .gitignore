@@ -20,6 +20,9 @@ env.bak/
 venv.bak/
 .mypy_cache/
 **/migrations
+!DjangoProjects/apps/bookmodule/migrations/
+!DjangoProjects/apps/bookmodule/migrations/__init__.py
+!DjangoProjects/apps/bookmodule/migrations/0001_initial.py
 *.DS_Store
 **/__pycache__
 **/.DS_Store

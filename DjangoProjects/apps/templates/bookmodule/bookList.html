@@ -5,16 +5,10 @@
 <h1>Books List</h1>
 
 {% if books %}
-    <ul>
-        {% for book in books %}
-            <li>
-                <strong>ID:</strong> {{ book.id }}<br/>
-                <strong>Title:</strong> {{ book.title }}<br/>
-                <strong>Author:</strong> {{ book.author }}
-            </li>
-            <hr/>
-        {% endfor %}
-    </ul>
+    {% for obj in books %}
+        ID: {{ obj.id }}, Title: {{ obj.title }}
+        <hr>
+    {% endfor %}
 {% else %}
     <p>No matching books found.</p>
 {% endif %}
