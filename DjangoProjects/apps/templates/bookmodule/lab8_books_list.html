@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %}
+{% block title %} {{ task_title }} {% endblock title %}
+
+{% block content %}
+<h1>{{ task_title }} - Books</h1>
+
+{% if books %}
+    {% for obj in books %}
+        ID: {{ obj.id }},
+        Title: {{ obj.title }},
+        Author: {{ obj.author }},
+        Price: {{ obj.price }},
+        Edition: {{ obj.edition }}
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No books found.</p>
+{% endif %}
+{% endblock content %}

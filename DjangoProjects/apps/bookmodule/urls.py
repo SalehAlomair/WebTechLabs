@@ -14,4 +14,10 @@ urlpatterns = [
     path('html5/text/formatting', views.html5_text_formatting, name='books.html5_text_formatting'),
     path('html5/listing', views.html5_listing, name='books.html5_listing'),
     path('html5/tables', views.html5_tables, name='books.html5_tables'),
+    path('lab8/task1', views.lab8_task1, name='books.lab8.task1'),
+    path('lab8/task2', views.lab8_task2, name='books.lab8.task2'),
+    path('lab8/task3', views.lab8_task3, name='books.lab8.task3'),
+    path('lab8/task4', views.lab8_task4, name='books.lab8.task4'),
+    path('lab8/task5', views.lab8_task5, name='books.lab8.task5'),
+    path('lab8/task7', views.lab8_task7, name='books.lab8.task7'),
 ]
