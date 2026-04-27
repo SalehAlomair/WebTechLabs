@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab9 Task2 {% endblock title %}
+{% block content %}
+<h1>Lab9 Task2 - Publishers and Total Stock</h1>
+{% if publishers %}
+    {% for publisher in publishers %}
+        <div>
+            <strong>{{ publisher.name }}</strong><br/>
+            Location: {{ publisher.location }}<br/>
+            Total stock: {{ publisher.total_stock|default:0 }}
+        </div>
+        <hr/>
+    {% endfor %}
+{% else %}
+    <p>No publishers found.</p>
+{% endif %}
+{% endblock content %}

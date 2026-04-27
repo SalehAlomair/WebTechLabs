@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab9 Task5 {% endblock title %}
+{% block content %}
+<h1>Lab9 Task5 - Highly Rated Books Per Publisher</h1>
+{% if publishers %}
+    {% for publisher in publishers %}
+        <div>
+            <strong>{{ publisher.name }}</strong><br/>
+            Highly rated books count: {{ publisher.high_rated_count }}
+        </div>
+        <hr/>
+    {% endfor %}
+{% else %}
+    <p>No publishers found.</p>
+{% endif %}
+{% endblock content %}

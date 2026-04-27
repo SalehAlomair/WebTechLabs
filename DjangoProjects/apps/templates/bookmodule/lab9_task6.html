@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab9 Task6 {% endblock title %}
+{% block content %}
+<h1>Lab9 Task6 - Filtered Book Count Per Publisher</h1>
+{% if publishers %}
+    {% for publisher in publishers %}
+        <div>
+            <strong>{{ publisher.name }}</strong><br/>
+            Filtered books count: {{ publisher.filtered_count }}
+        </div>
+        <hr/>
+    {% endfor %}
+{% else %}
+    <p>No publishers found.</p>
+{% endif %}
+{% endblock content %}
