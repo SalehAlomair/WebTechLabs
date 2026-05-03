@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Lab10 Task1{% endblock title %}
+
+{% block content %}
+<h2>Lab10 Task1: Books Dashboard</h2>
+<p>
+  <a href="/books/lab10/task2">Add Book</a> |
+  <a href="/books/lab10/task5">Search/Filter</a> |
+  <a href="/books/lab10/task6">Seed Demo Data</a>
+</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Author Field</th>
+    <th>Publisher</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Rating</th>
+    <th>Actions</th>
+  </tr>
+  {% for book in books %}
+  <tr>
+    <td>{{ book.id }}</td>
+    <td>{{ book.title }}</td>
+    <td>{{ book.author }}</td>
+    <td>{% if book.publisher %}{{ book.publisher.name }}{% else %}-{% endif %}</td>
+    <td>{{ book.price }}</td>
+    <td>{{ book.quantity }}</td>
+    <td>{{ book.rating }}</td>
+    <td>
+      <a href="/books/lab10/task3?id={{ book.id }}">Edit</a>
+      |
+      <a href="/books/lab10/task4?id={{ book.id }}">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="8">No books found.</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

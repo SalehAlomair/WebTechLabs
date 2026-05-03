@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Lab10 Task3{% endblock title %}
+
+{% block content %}
+<h2>Lab10 Task3: Edit Book</h2>
+{% if book %}
+<p>Editing: <strong>{{ book.title }}</strong> (ID: {{ book.id }})</p>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Update Book</button>
+</form>
+{% else %}
+<p>No books available to edit.</p>
+{% endif %}
+<p><a href="/books/lab10/task1">Back to Task1</a></p>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Lab10 Task6{% endblock title %}
+
+{% block content %}
+<h2>Lab10 Task6: Seed Demo Data</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Create Lab10 Sample Books</button>
+</form>
+
+{% if created %}
+<p>Sample books were created successfully.</p>
+{% endif %}
+
+<h3>Current Lab10 Sample Books</h3>
+<ul>
+  {% for book in sample_books %}
+  <li>{{ book.title }} - {{ book.price }} - Qty: {{ book.quantity }}</li>
+  {% empty %}
+  <li>No Lab10 sample books yet.</li>
+  {% endfor %}
+</ul>
+<p><a href="/books/lab10/task1">Back to Task1</a></p>
+{% endblock content %}

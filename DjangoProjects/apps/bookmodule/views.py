@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count, Sum, Avg, Max, Min, OuterRef, Subquery
 from .models import Book, Student, Publisher, Author
+from .forms import BookForm, BookFilterForm
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -172,3 +173,98 @@ def lab9_task6(request):
         )
     ).order_by('name')
     return render(request, 'bookmodule/lab9_task6.html', {'publishers': publishers})
+
+
+def lab10_task1(request):
+    books = Book.objects.select_related('publisher').prefetch_related('authors').order_by('id')
+    return render(request, 'bookmodule/lab10_task1.html', {'books': books})
+
+
+def lab10_task2(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab10.task1')
+    else:
+        form = BookForm()
+
+    return render(request, 'bookmodule/lab10_task2.html', {'form': form})
+
+
+def lab10_task3(request):
+    book_id = request.GET.get('id')
+    if not book_id:
+        first_book = Book.objects.order_by('id').first()
+        if not first_book:
+            return render(request, 'bookmodule/lab10_task3.html', {'book': None, 'form': None})
+        return redirect(f"/books/lab10/task3?id={first_book.id}")
+
+    book = get_object_or_404(Book, pk=book_id)
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('books.lab10.task1')
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, 'bookmodule/lab10_task3.html', {'book': book, 'form': form})
+
+
+def lab10_task4(request):
+    book_id = request.GET.get('id')
+    if not book_id:
+        return redirect('books.lab10.task1')
+
+    book = get_object_or_404(Book, pk=book_id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('books.lab10.task1')
+
+    return render(request, 'bookmodule/lab10_task4.html', {'book': book})
+
+
+def lab10_task5(request):
+    form = BookFilterForm(request.GET or None)
+    books = Book.objects.select_related('publisher').prefetch_related('authors').order_by('title')
+    if form.is_valid():
+        keyword = form.cleaned_data.get('keyword')
+        min_price = form.cleaned_data.get('min_price')
+        publisher = form.cleaned_data.get('publisher')
+
+        if keyword:
+            books = books.filter(Q(title__icontains=keyword) | Q(author__icontains=keyword))
+        if min_price is not None:
+            books = books.filter(price__gte=min_price)
+        if publisher:
+            books = books.filter(publisher=publisher)
+
+    return render(request, 'bookmodule/lab10_task5.html', {'form': form, 'books': books})
+
+
+def lab10_task6(request):
+    created = False
+    if request.method == 'POST':
+        publisher, _ = Publisher.objects.get_or_create(name='Lab10 Publisher', defaults={'location': 'Doha'})
+        author_a, _ = Author.objects.get_or_create(name='Lab10 Author A', defaults={'DOB': '1990-01-01'})
+        author_b, _ = Author.objects.get_or_create(name='Lab10 Author B', defaults={'DOB': '1992-05-10'})
+
+        for idx in range(1, 4):
+            book, is_created = Book.objects.get_or_create(
+                title=f'Lab10 Book {idx}',
+                defaults={
+                    'author': f'Author {idx}',
+                    'price': 40 + idx * 10,
+                    'edition': idx,
+                    'quantity': idx + 1,
+                    'rating': 3 + (idx % 2),
+                    'publisher': publisher,
+                },
+            )
+            if is_created:
+                book.authors.add(author_a, author_b)
+                created = True
+
+    sample_books = Book.objects.filter(title__startswith='Lab10 Book').order_by('id')
+    return render(request, 'bookmodule/lab10_task6.html', {'sample_books': sample_books, 'created': created})

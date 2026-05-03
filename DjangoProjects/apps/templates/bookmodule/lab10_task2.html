@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Lab10 Task2{% endblock title %}
+
+{% block content %}
+<h2>Lab10 Task2: Add Book (ModelForm)</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save Book</button>
+</form>
+<p><a href="/books/lab10/task1">Back to Task1</a></p>
+{% endblock content %}
